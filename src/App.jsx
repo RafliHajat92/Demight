@@ -107,8 +107,8 @@ export default function App() {
                 <img
                   src="/images/logo.png"
                   alt="Demight"
-                  className="w-12 h-12 object-contain"
-                  style={{ filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.3))' }}
+                  className="w-24 h-24 md:w-28 md:h-28 object-contain"
+                  style={{ filter: 'drop-shadow(0 0 12px rgba(255,255,255,0.4))' }}
                 />
               </div>
 

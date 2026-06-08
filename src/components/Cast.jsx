@@ -61,9 +61,11 @@ function CastCard({ f, i }) {
       >
         {/* Red line */}
         <div className="w-6 h-[2px] rounded-full bg-[#e8192c] mb-2" />
-        <p className="text-[9px] font-mono tracking-[0.18em] text-[#e8192c] uppercase mb-0.5">
-          {f.role.split('/')[0].trim()}
-        </p>
+        {f.origin && (
+          <div className="flex items-center mb-1">
+            <span className="text-[10px] font-mono tracking-widest text-[#e8192c] uppercase">{f.origin}</span>
+          </div>
+        )}
         <h3 className="text-[13px] font-extrabold text-white uppercase tracking-tight leading-tight font-display">
           {f.nickname}
         </h3>

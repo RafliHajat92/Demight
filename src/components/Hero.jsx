@@ -22,7 +22,7 @@ export default function Hero({ onOpenMemory }) {
   }, [index, go]);
 
   return (
-    <section id="home" className="relative min-h-[100vh] flex items-end overflow-hidden bg-[#080810]">
+    <section id="home" className="relative min-h-[100vh] flex items-center overflow-hidden bg-[#080810]">
 
       {/* ── BG Image ─────────────────────────────────────────────── */}
       <div className="absolute inset-0 z-0">
@@ -49,7 +49,7 @@ export default function Hero({ onOpenMemory }) {
       <div className="glow-red absolute -bottom-32 -left-32 w-[500px] h-[500px] opacity-20 z-0 pointer-events-none" />
 
       {/* ── Content ──────────────────────────────────────────────── */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pb-24 pt-32">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12">
 
         <AnimatePresence mode="wait">
           <motion.div

@@ -86,9 +86,9 @@ export default function Navbar() {
             <motion.img
               src="/images/logo.png"
               alt="Demight"
-              className="w-12 h-12 object-contain"
+              className="w-20 h-20 md:w-24 md:h-24 object-contain"
               whileHover={{ rotate: 10 }}
-              style={{ filter: 'drop-shadow(0 0 12px rgba(255,255,255,0.5))' }}
+              style={{ filter: 'drop-shadow(0 0 16px rgba(255,255,255,0.6))' }}
               transition={{ duration: 0.3 }}
             />
           </motion.button>
