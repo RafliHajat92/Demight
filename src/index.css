@@ -1,0 +1,283 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Syne", system-ui, sans-serif;
+
+  /* IDLIX-inspired color palette */
+  --color-bg-base:      #080810;
+  --color-bg-surface:   #0f0f1a;
+  --color-bg-card:      #12121e;
+  --color-bg-elevated:  #1a1a2e;
+
+  --color-red:          #e8192c;
+  --color-red-dim:      #b5101e;
+  --color-red-glow:     rgba(232, 25, 44, 0.18);
+
+  --color-gold:         #f5c518;
+  --color-gold-dim:     rgba(245, 197, 24, 0.15);
+
+  --color-text-primary:   #ffffff;
+  --color-text-secondary: #b8c5d6;
+  --color-text-muted:     #6e7e94;
+
+  --color-border:       rgba(255,255,255,0.06);
+  --color-border-hover: rgba(255,255,255,0.12);
+}
+
+/* ─── Base ────────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: #080810;
+  color: #a8b3c8;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: #fff;
+}
+
+/* Layout reset */
+#root {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  border: none !important;
+  padding: 0 !important;
+  min-height: 100vh !important;
+  text-align: left !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* ─── Scrollbar ───────────────────────────────────────────────────────────── */
+::-webkit-scrollbar        { width: 6px; }
+::-webkit-scrollbar-track  { background: #080810; }
+::-webkit-scrollbar-thumb  {
+  background: #1e1e32;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover { background: #e8192c; }
+
+/* ─── Selection ───────────────────────────────────────────────────────────── */
+::selection {
+  background: rgba(232, 25, 44, 0.25);
+  color: #fff;
+}
+
+/* ─── Glass Panels ────────────────────────────────────────────────────────── */
+.glass {
+  background: rgba(15, 15, 26, 0.72);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.glass-sm {
+  background: rgba(18, 18, 30, 0.60);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* ─── Text gradients ──────────────────────────────────────────────────────── */
+.text-gradient-red {
+  background: linear-gradient(120deg, #ff4458 0%, #e8192c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-silver {
+  background: linear-gradient(135deg, #ffffff 0%, #8899aa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Ambient Glows ───────────────────────────────────────────────────────── */
+.glow-red {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,25,44,0.22) 0%, transparent 70%);
+  filter: blur(0px);
+  pointer-events: none;
+}
+.glow-navy {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(30,50,120,0.18) 0%, transparent 70%);
+  filter: blur(0px);
+  pointer-events: none;
+}
+
+/* ─── Cards ───────────────────────────────────────────────────────────────── */
+.card-hover {
+  transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              border-color 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: 0 24px 48px -12px rgba(0,0,0,0.7),
+              0 0 0 1px rgba(232,25,44,0.18);
+}
+
+/* ─── Nav link underline ──────────────────────────────────────────────────── */
+.nav-link {
+  position: relative;
+  transition: color 0.25s ease;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #e8192c;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border-radius: 1px;
+}
+.nav-link:hover::after,
+.nav-link.active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ─── Red CTA button ──────────────────────────────────────────────────────── */
+.btn-red {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: 6px;
+  background: #e8192c;
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+  border: none;
+}
+.btn-red:hover {
+  background: #ff2d42;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -4px rgba(232,25,44,0.4);
+}
+.btn-red:active { transform: translateY(0); }
+
+/* ─── Ghost button ────────────────────────────────────────────────────────── */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 24px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+.btn-ghost:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.2);
+  transform: translateY(-2px);
+}
+
+/* ─── Section label ───────────────────────────────────────────────────────── */
+.section-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #e8192c;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-label::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 2px;
+  background: #e8192c;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+/* ─── Stat bar ────────────────────────────────────────────────────────────── */
+.stat-bar-track {
+  height: 3px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+.stat-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #e8192c, #ff4458);
+  border-radius: 9999px;
+  box-shadow: 0 0 8px rgba(232,25,44,0.4);
+  transform-origin: left;
+}
+
+/* ─── Equalizer ───────────────────────────────────────────────────────────── */
+.eq-bar {
+  width: 3px;
+  background: #e8192c;
+  border-radius: 2px;
+  box-shadow: 0 0 6px rgba(232,25,44,0.5);
+}
+
+/* ─── Poster image shimmer overlay ───────────────────────────────────────── */
+.poster-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(8,8,16,1) 0%,
+    rgba(8,8,16,0.7) 35%,
+    rgba(8,8,16,0.2) 65%,
+    transparent 100%
+  );
+}
+
+/* ─── Keyframes ───────────────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+@keyframes scanline {
+  0%   { top: -5%; }
+  100% { top: 105%; }
+}
+
+.animate-fade-up   { animation: fadeUp 0.7s cubic-bezier(0.25,0.46,0.45,0.94) both; }
+.animate-fade-in   { animation: fadeIn 0.6s ease both; }
+.animate-pulse-dot { animation: pulse-dot 1.5s ease-in-out infinite; }
