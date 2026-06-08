@@ -7,7 +7,7 @@ const featured = memories.filter(m => m.featured);
 
 export default function Hero({ onOpenMemory }) {
   const [index, setIndex] = useState(0);
-  const [dir, setDir]     = useState(1);
+  const [dir, setDir] = useState(1);
   const current = featured[index];
 
   const go = useCallback((next) => {
@@ -50,6 +50,7 @@ export default function Hero({ onOpenMemory }) {
 
       {/* ── Content ──────────────────────────────────────────────── */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pb-24 pt-32">
+
         <AnimatePresence mode="wait">
           <motion.div
             key={current.id}

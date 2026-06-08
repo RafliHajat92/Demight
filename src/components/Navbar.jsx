@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Film } from 'lucide-react';
+
 
 const NAV_ITEMS = [
-  { id: 'home',     label: 'Home' },
+  { id: 'home', label: 'Home' },
   { id: 'memories', label: 'Memories' },
-  { id: 'seasons',  label: 'Seasons' },
-  { id: 'cast',     label: 'Cast' },
-  { id: 'reviews',  label: 'Reviews' },
+  { id: 'seasons', label: 'Seasons' },
+  { id: 'cast', label: 'Cast' },
+  { id: 'reviews', label: 'Reviews' },
 ];
 
 const navContainerVariants = {
@@ -18,12 +18,12 @@ const navContainerVariants = {
 };
 
 const navItemVariants = {
-  hidden:  { opacity: 0, y: -10 },
+  hidden: { opacity: 0, y: -10 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] } },
 };
 
 const mobileMenuVariants = {
-  hidden:  { opacity: 0, y: -8 },
+  hidden: { opacity: 0, y: -8 },
   visible: (i) => ({
     opacity: 1, y: 0,
     transition: { duration: 0.3, delay: i * 0.06, ease: [0.25, 0.46, 0.45, 0.94] },
@@ -31,9 +31,9 @@ const mobileMenuVariants = {
 };
 
 export default function Navbar() {
-  const [scrolled, setScrolled]           = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
-  const [menuOpen, setMenuOpen]           = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const ticking = useRef(false);
 
   useEffect(() => {
@@ -68,32 +68,29 @@ export default function Navbar() {
         initial={{ y: -60, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-          scrolled
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled
             ? 'glass border-b border-white/5 shadow-[0_4px_40px_rgba(0,0,0,0.6)]'
             : 'bg-gradient-to-b from-black/80 to-transparent backdrop-blur-none border-b border-transparent'
-        }`}
+          }`}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
 
           {/* Logo */}
           <motion.button
             onClick={() => scrollTo('home')}
-            className="flex items-center gap-2.5 group cursor-pointer"
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.97 }}
+            className="flex items-center cursor-pointer"
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.95 }}
             transition={{ type: 'spring', stiffness: 400, damping: 20 }}
           >
-            <motion.div
-              className="w-8 h-8 rounded bg-[#e8192c] flex items-center justify-center shadow-[0_0_16px_rgba(232,25,44,0.4)]"
-              whileHover={{ boxShadow: '0 0 28px rgba(232,25,44,0.7)', rotate: 8 }}
+            <motion.img
+              src="/images/logo.png"
+              alt="Demight"
+              className="w-12 h-12 object-contain"
+              whileHover={{ rotate: 10 }}
+              style={{ filter: 'drop-shadow(0 0 12px rgba(255,255,255,0.5))' }}
               transition={{ duration: 0.3 }}
-            >
-              <Film size={15} className="text-white" />
-            </motion.div>
-            <span className="font-display font-extrabold text-lg tracking-[0.12em] text-white uppercase">
-              Demight
-            </span>
+            />
           </motion.button>
 
           {/* Desktop nav */}
@@ -113,9 +110,8 @@ export default function Navbar() {
                   whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.95 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 22 }}
-                  className={`nav-link text-[13px] font-semibold tracking-wide py-1 cursor-pointer transition-colors duration-300 ${
-                    isActive ? 'text-white active' : 'text-[#a8b3c8] hover:text-white'
-                  }`}
+                  className={`nav-link text-[13px] font-semibold tracking-wide py-1 cursor-pointer transition-colors duration-300 ${isActive ? 'text-white active' : 'text-[#a8b3c8] hover:text-white'
+                    }`}
                 >
                   {item.label}
                   {isActive && (
@@ -191,9 +187,8 @@ export default function Navbar() {
                     onClick={() => scrollTo(item.id)}
                     whileHover={{ x: 6 }}
                     transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-                    className={`text-left py-3 text-sm font-semibold border-b border-white/4 cursor-pointer transition-colors duration-200 ${
-                      activeSection === item.id ? 'text-[#e8192c]' : 'text-[#a8b3c8] hover:text-white'
-                    }`}
+                    className={`text-left py-3 text-sm font-semibold border-b border-white/4 cursor-pointer transition-colors duration-200 ${activeSection === item.id ? 'text-[#e8192c]' : 'text-[#a8b3c8] hover:text-white'
+                      }`}
                   >
                     {item.label}
                   </motion.button>
