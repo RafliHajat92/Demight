@@ -145,9 +145,9 @@ export const friends = [
     credits: ["Nasi Goreng Jam 2 Pagi", "Warkop Filosofi Kopi"]
   },
   {
-    id: "ripal",
-    name: "Ripal",
-    nickname: "Ripal",
+    id: "rifal",
+    name: "Rifal",
+    nickname: "Rifal",
     origin: "Indramayu",
     role: "The Guardian",
     bio: "Sering jadi orang tua di grup, ngingetin barang bawaan biar ga ada yang ketinggalan.",
