@@ -13,7 +13,7 @@ function CastCard({ f, i }) {
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
     x.set(e.clientX - rect.left - rect.width / 2);
-    y.set(e.clientY - rect.top  - rect.height / 2);
+    y.set(e.clientY - rect.top - rect.height / 2);
   };
   const handleMouseLeave = () => { x.set(0); y.set(0); setHovered(false); };
 

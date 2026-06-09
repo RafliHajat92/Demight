@@ -279,10 +279,10 @@ export default function Timeline() {
   const next = useCallback(() => setActive(a => Math.min(seasons.length - 1, a + 1)), []);
 
   return (
-    <section id="seasons" className="relative py-24 bg-[#0a0a12] overflow-hidden">
+    <section id="seasons" className="relative py-8 md:py-24 bg-[#0a0a12] overflow-hidden">
       <div className="glow-red absolute -top-20 -right-20 w-[400px] h-[400px] opacity-6 z-0 pointer-events-none" />
 
-      <div className="max-w-5xl mx-auto px-6 md:px-10 relative z-10">
+      <div className="max-w-5xl mx-auto px-4 md:px-10 relative z-10">
 
         {/* Header */}
         <motion.div
@@ -290,54 +290,83 @@ export default function Timeline() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-14 space-y-1.5"
+          className="mb-1 md:mb-14 space-y-0"
         >
           <p className="section-label">Perjalanan</p>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight uppercase font-display">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight uppercase font-display leading-none mt-0">
             Seasons
           </h2>
         </motion.div>
 
         {/* Layout */}
-        <div className="flex flex-col md:flex-row gap-10 md:gap-16 items-start md:items-center">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-16 items-start md:items-center">
 
-          {/* LEFT — drum + controls */}
-          <div className="flex flex-col items-center gap-5 shrink-0">
+          {/* LEFT — drum only on mobile, drum+controls on desktop */}
+          <div className="flex flex-col items-center shrink-0">
             <Drum active={active} onSelect={setActive} />
 
-            {/* Arrows */}
-            <div className="flex gap-3">
-              <motion.button onClick={prev} disabled={active === 0}
-                whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}
-                className="w-8 h-8 rounded-full border border-white/10 bg-white/4 flex items-center justify-center
-                           text-white/40 hover:text-white hover:border-[#e8192c]/40 disabled:opacity-20 transition-colors">
-                <ChevronUp size={15} />
-              </motion.button>
-              <motion.button onClick={next} disabled={active === seasons.length - 1}
-                whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}
-                className="w-8 h-8 rounded-full border border-white/10 bg-white/4 flex items-center justify-center
-                           text-white/40 hover:text-white hover:border-[#e8192c]/40 disabled:opacity-20 transition-colors">
-                <ChevronDown size={15} />
-              </motion.button>
-            </div>
-
-            {/* Dots */}
-            <div className="flex gap-1.5">
-              {seasons.map((_, i) => (
-                <button key={i} onClick={() => setActive(i)}
-                  style={{
-                    width: i === active ? 14 : 4, height: 4, borderRadius: 9999,
-                    background: i === active ? '#e8192c' : 'rgba(255,255,255,0.1)',
-                    transition: 'all 0.3s',
-                  }}
-                />
-              ))}
+            {/* Arrows + Dots — desktop only */}
+            <div className="hidden md:flex flex-col items-center gap-4 mt-4">
+              <div className="flex gap-3">
+                <motion.button onClick={prev} disabled={active === 0}
+                  whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}
+                  className="w-8 h-8 rounded-full border border-white/10 bg-white/4 flex items-center justify-center
+                             text-white/40 hover:text-white hover:border-[#e8192c]/40 disabled:opacity-20 transition-colors">
+                  <ChevronUp size={15} />
+                </motion.button>
+                <motion.button onClick={next} disabled={active === seasons.length - 1}
+                  whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}
+                  className="w-8 h-8 rounded-full border border-white/10 bg-white/4 flex items-center justify-center
+                             text-white/40 hover:text-white hover:border-[#e8192c]/40 disabled:opacity-20 transition-colors">
+                  <ChevronDown size={15} />
+                </motion.button>
+              </div>
+              <div className="flex gap-1.5">
+                {seasons.map((_, i) => (
+                  <button key={i} onClick={() => setActive(i)}
+                    style={{
+                      width: i === active ? 14 : 4, height: 4, borderRadius: 9999,
+                      background: i === active ? '#e8192c' : 'rgba(255,255,255,0.1)',
+                      transition: 'all 0.3s',
+                    }}
+                  />
+                ))}
+              </div>
             </div>
           </div>
 
           {/* RIGHT — photo mosaic */}
           <div className="flex-1 min-w-0 w-full">
             <PhotoMosaic season={seasons[active]} />
+
+            {/* Arrows + Dots — mobile only, after photo */}
+            <div className="flex md:hidden items-center justify-between mt-4">
+              <div className="flex gap-1.5">
+                {seasons.map((_, i) => (
+                  <button key={i} onClick={() => setActive(i)}
+                    style={{
+                      width: i === active ? 14 : 4, height: 4, borderRadius: 9999,
+                      background: i === active ? '#e8192c' : 'rgba(255,255,255,0.1)',
+                      transition: 'all 0.3s',
+                    }}
+                  />
+                ))}
+              </div>
+              <div className="flex gap-2">
+                <motion.button onClick={prev} disabled={active === 0}
+                  whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}
+                  className="w-8 h-8 rounded-full border border-white/10 bg-white/4 flex items-center justify-center
+                             text-white/40 hover:text-white hover:border-[#e8192c]/40 disabled:opacity-20 transition-colors">
+                  <ChevronUp size={15} />
+                </motion.button>
+                <motion.button onClick={next} disabled={active === seasons.length - 1}
+                  whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}
+                  className="w-8 h-8 rounded-full border border-white/10 bg-white/4 flex items-center justify-center
+                             text-white/40 hover:text-white hover:border-[#e8192c]/40 disabled:opacity-20 transition-colors">
+                  <ChevronDown size={15} />
+                </motion.button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

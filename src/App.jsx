@@ -113,7 +113,7 @@ export default function App() {
               </div>
 
               <p className="text-[12px] text-[#5a6478] flex items-center gap-1.5 font-light">
-                Made with <Heart size={10} className="text-[#e8192c] fill-[#e8192c]" /> for a lifelong friendship
+                Since 23 <Heart size={10} className="text-[#e8192c] fill-[#e8192c]" /> Sistem informasi UAD
               </p>
 
               <p className="font-mono text-[10px] text-[#2a2a3e] tracking-widest uppercase">
